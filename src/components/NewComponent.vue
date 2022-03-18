@@ -3,9 +3,9 @@
     <v-container grid-list-xs12>
       <v-btn color="info">text</v-btn>
     </v-container>
-    <v-content>
+    <v-main>
       <h2>men uly</h2>
-    </v-content>
+    </v-main>
   </div>
 </template>
 
