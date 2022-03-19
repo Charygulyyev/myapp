@@ -4,7 +4,7 @@
       <v-btn color="info">text</v-btn>
     </v-container>
     <v-main>
-      <h2>men uly</h2>
+      <h2>This is an about page</h2>
     </v-main>
   </div>
 </template>
