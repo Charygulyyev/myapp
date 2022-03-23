@@ -1,29 +1,70 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "todo",
+    component: () =>
+      import(
+        /* webpackChunkName: "todoComponent" */ "../components/TodoComponent.vue"
+      ),
+    children: [
+      {
+        path: "list/:id",
+        name: "tasks",
+        components: {
+          tasks: () =>
+            import(
+              /* webpackChunkName: "tasks" */ "../components/TasksComponent.vue"
+            ),
+        },
+        children: [
+          {
+            path: "task/:taskId",
+            name: "notes",
+            components: {
+              notes: () =>
+                import(
+                  /* webpackChunkName: "notesModal" */ "../components/NotesModal.vue"
+                ),
+            },
+          },
+        ],
+      },
+    ],
   },
   {
-    path: '/about',
-    name: 'about',
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(
+        /* webpackChunkName: "login" */ "../components/Auth/LoginComponent.vue"
+      ),
+  },
+  {
+    path: "/signup",
+    name: "signup",
+    component: () =>
+      import(/* webpackChunkName: "signup" */ "../components/Auth/SignUp.vue"),
+  },
+  {
+    path: "/about",
+    name: "about",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
