@@ -54,19 +54,7 @@
 export default {
   name: "LoginComponent",
   methods: {
-    login() {
-      this.$store
-        .dispatch("LOGIN", {
-          _username: this.username,
-          _password: this.password,
-        })
-        .then(() => {
-          this.$router.push("/");
-        })
-        .catch(() => {
-          this.error = true;
-        });
-    },
+    login() {},
   },
   data() {
     return {

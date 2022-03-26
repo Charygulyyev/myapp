@@ -8,16 +8,12 @@
           </v-toolbar>
           <v-card-text>
             <v-form>
-              <v-alert type="error" :value="true">
-                This user already exists, try a different set of data.
-              </v-alert>
               <v-text-field
                 prepend-icon="mdi-account"
                 name="Login"
                 label="Login"
                 id="SignUpLoginId"
                 type="text"
-                :rules="[rules.required]"
               />
               <v-text-field
                 prepend-icon="mdi-email"
@@ -25,7 +21,6 @@
                 label="Email"
                 id="SignUpEmailId"
                 type="email"
-                :rules="[rules.required, rules.email]"
               />
               <v-text-field
                 prepend-icon="mdi-lock"
@@ -34,7 +29,6 @@
                 label="Password"
                 id="SignUpPasswordId"
                 type="password"
-                :rules="[rules.required]"
               />
               <v-text-field
                 prepend-icon="mdi-lock"
@@ -43,8 +37,6 @@
                 label="Confirm password"
                 id="SignUpConfirmPasswordId"
                 type="password"
-                :rules="[rules.required]"
-                :error="!valid()"
               />
             </v-form>
           </v-card-text>
@@ -70,20 +62,9 @@ export default {
     return {
       password: "",
       password2: "",
-      rules: {
-        required: (value) => !!value || "required",
-        email: (value) => {
-          const pattern =
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return pattern.test(value) || "Invalid e-mail!";
-        },
-      },
     };
   },
   methods: {
-    valid() {
-      return this.password === this.password2;
-    },
     register() {
       this.$router.push("/login");
     },
